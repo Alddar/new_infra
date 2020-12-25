@@ -1,0 +1,6 @@
+#! /bin/sh
+pkill polybar
+polybar -c $HOME/dotfiles/common/bspwm/polybar mybar &
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+
