@@ -10,9 +10,6 @@ super + Return
 super + d
 	rofi -show run	
 
-XF86MonBrightness{Up,Down}
-	sudo light -{A,U} 10 
-
 XF86Audio{Raise,Lower}Volume
 	pamixer -{i,d} 5
 
@@ -53,7 +50,7 @@ super + g
 	bspc node -s biggest
 
 super + l
-    betterlockscreen -l blur 
+    betterlockscreen -l blur
 
 #
 # state/flags

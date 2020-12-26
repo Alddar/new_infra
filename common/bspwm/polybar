@@ -42,9 +42,6 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
-border-color = #00000000
-
 padding-left = 0
 padding-right = 2
 
@@ -56,12 +53,12 @@ font-1 = siji:pixelsize=10;1
 font-2 = notoemoji:scale=6;1
 font-3 = unifont:fontformat=truetype:size=10:antialias=false;1
 
-modules-left = bspwm 
+modules-left = bspwm
 modules-center = mpd
 modules-right = filesystem xbacklight pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
-tray-padding = 2
+;tray-padding = 2
 ;tray-background = #0063ff
 
 wm-restack = bspwm
