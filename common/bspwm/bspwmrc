@@ -1,5 +1,5 @@
 #! /bin/sh
-pkill polybar
-polybar -c $HOME/new_infra/common/bspwm/polybar mybar &
+# pkill polybar
+# polybar -c $HOME/new_infra/common/bspwm/polybar mybar &
 
 bspc monitor -d I II III IV V VI VII VIII IX X

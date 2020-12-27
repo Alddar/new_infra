@@ -4,11 +4,11 @@
 
 # terminal emulator
 super + Return
-	terminator
+	alacritty
 
 # program launcher
 super + d
-	rofi -show run	
+	rofi -show run
 
 XF86Audio{Raise,Lower}Volume
 	pamixer -{i,d} 5
