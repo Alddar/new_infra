@@ -19,7 +19,7 @@
   networking.networkmanager.enable = true;
   nixpkgs.config.allowUnfree = true;
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Europe/Prague";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -48,6 +48,7 @@
     fira-code
     noto-fonts
     iosevka
+    material-design-icons
     ];
     fontconfig = {
       defaultFonts = {
@@ -96,21 +97,13 @@
     layout = "us,cz";
     xkbOptions = "grp:alt_shift_toggle";
 
-    windowManager.bspwm = {
-      enable = true;
-      configFile = "/home/ozavodny/new_infra/common/bspwm/bspwmrc";
-      sxhkd.configFile = "/home/ozavodny/new_infra/common/bspwm/sxhkdrc";
-
-    };
-
-
     displayManager = {
-      defaultSession = "xfce+bspwm";
+      defaultSession = "xfce";
     };
 
   };
 
-  /* programs.light.enable = true; */
+  programs.light.enable = true;
   services.actkbd = {
     enable = true;
     bindings = [
@@ -124,22 +117,22 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
+  nixpkgs.config.pulseaudio = true;
+
   # Enable sound.
+  sound.enable = true;
   hardware.pulseaudio = {
     enable = true;
     support32Bit = true;
-
-    # NixOS allows either a lightweight build (default) or full build of PulseAudio to be installed.
-    # Only the full build has Bluetooth support, so it must be selected here.
     package = pkgs.pulseaudioFull;
   };
-
-  nixpkgs.config.pulseaudio = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ozavodny = {

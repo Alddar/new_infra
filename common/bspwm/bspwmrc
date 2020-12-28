@@ -2,4 +2,4 @@
 # pkill polybar
 # polybar -c $HOME/new_infra/common/bspwm/polybar mybar &
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
