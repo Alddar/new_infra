@@ -207,7 +207,7 @@
       "XF86AudioMute" = "pamixer -t";
       "XF86MonBrightnessUp" = "light -A 10";
       "XF86MonBrightnessDown" = "light -U 10";
-      "Print" = "flameshot gui";
+      "{_, shift + }Print" = "flameshot {gui,full} -p /home/ozavodny/Pictures/Screenshots";
       "super + Escape" = "systemctl --user restart sxhkd.service";
       "super + shift + Escape" = "systemctl --user restart polybar.service";
       "super + {_,shift + }{1-9,0}" = "bspc {desktop -f,node -d} '^{1-9,10}'";
