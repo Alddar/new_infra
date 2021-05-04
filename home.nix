@@ -1,5 +1,32 @@
 { config, pkgs, ... }:
-
+let
+  colors = {
+      primary = {
+        background = "#1e1e1e";
+        foreground = "#ffffff";
+      };
+      normal = {
+          black   = "#1e1e1e";
+          red     = "#ff453a";
+          green   = "#32d74b";
+          yellow  = "#ffd60a";
+          blue    = "#0a84ff";
+          magenta = "#bf5af2";
+          cyan    = "#5ac8fa";
+          white   = "#ffffff";
+      };
+      bright = {
+          black   = "#1e1e1e";
+          red     = "#ff453a";
+          green   = "#32d74b";
+          yellow  = "#ffd60a";
+          blue    = "#0a84ff";
+          magenta = "#bf5af2";
+          cyan    = "#5ac8fa";
+          white   = "#ffffff";
+      };
+  };
+in
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -13,12 +40,29 @@
     light
     lolcat
     cmatrix
+    exa
+    vivaldi
+    fzf
   ];
 
   xsession.enable = true;
   xsession.windowManager.bspwm = {
     enable = true;
     monitors = { "eDP-1" = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" "10" ] ; } ;
+    settings = {
+      pointer_modifier = "mod4";
+      pointer_action1 = "resize_side";
+      pointer_action2 = "move";
+    };
+  };
+
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      "ls" = "exa";
+      "ll" = "exa -l";
+      "la" = "exa -la";
+    };
   };
 
   programs.alacritty = {
@@ -28,6 +72,7 @@
       font = {
         size = 7;
       };
+      colors = colors;
     };
   };
 
@@ -50,6 +95,8 @@
     };
   };
 
+  services.network-manager-applet.enable = true;
+  services.gnome-keyring.enable = true;
   services.flameshot.enable = true;
   programs.rofi = {
     enable = true;
@@ -63,15 +110,6 @@
     };
 
     config = {
-      "color" = {
-        background = "#1F1F1F";
-        foreground = "#FFFFFF";
-        foreground-alt = "#8F8F8F";
-        module-fg = "#1F1F1F";
-        primary = "#ffb300";
-        secondary = "#E53935";
-        alternate = "#7cb342";
-      };
       "bar/top" = {
         height = "34";
         radius = 0;
@@ -87,7 +125,8 @@
 
         separator = " ";
         line-size = 2;
-        background = "#1F1F1F";
+        background = colors.primary.background;
+        foreground = colors.primary.foreground;
 
       };
       "module/date" = {
@@ -115,12 +154,12 @@
 
         label-focused = "%icon%";
         label-focused-padding = 1;
-        label-focused-foreground = "#fba922";
-        label-focused-underline = "#fba922";
+        label-focused-foreground = colors.normal.yellow;
+        label-focused-underline = colors.normal.yellow;
 
         label-occupied = "%icon%";
         label-occupied-padding = 1;
-        label-occupied-foreground = "#7cb342";
+        label-occupied-foreground = colors.normal.green;
 
         label-urgent = "%icon%!";
         label-urgent-padding = 1;
@@ -164,8 +203,6 @@
         click-left = "~/.nix-profile/bin/playerctl previous &";
         click-right = "~/.nix-profile/bin/playerctl next &";
         click-middle = "~/.nix-profile/bin/playerctl play-pause &";
-
-        background = "#1F1F1F";
       };
       "module/pulseaudio" = {
         type = "internal/pulseaudio";
@@ -201,7 +238,7 @@
   services.sxhkd = {
     enable = true;
     keybindings = {
-      "super + Return" = "alacritty";
+      "super + Return" = "nixGLIntel alacritty";
       "super + d" = "rofi -show run";
       "XF86Audio{Raise,Lower}Volume" = "pamixer -{i,d} 5";
       "XF86AudioMute" = "pamixer -t";

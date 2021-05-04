@@ -7,17 +7,34 @@
 {
   imports =
   [ # Include the results of the hardware scan.
-  ./hardware-configuration.nix
+    /etc/nixos/hardware-configuration.nix
+    ../common/basic.nix
   ];
 
+  basic.user.extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
+
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+#    efi.canTouchEfiVariables = true;
+    grub = {
+     enable = true;
+     efiSupport = true;
+     device = "nodev";
+  };
+  };
 
   networking.hostName = "hammond"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
-  nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    vivaldi = {
+      proprietaryCodecs = true;
+      enableWideVine = true;
+    };
+  };
   # Set your time zone.
   time.timeZone = "Europe/Prague";
 
@@ -63,15 +80,13 @@
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
 
   environment.systemPackages = with pkgs; [
-    wget
-    vim
     neofetch
     terminator
     rofi
     pcmanfm
     pamixer
-    git
     xorg.xbacklight
+    vivaldi
   ];
 
 
@@ -81,7 +96,7 @@
   # services.xserver.desktopManager.plasma5.enable = true;
 
   services.xserver = {
-    #  videoDrivers = [ "nvidia" ];
+    videoDrivers = [ "modesetting" "nvidia" ];
     enable = true;
     desktopManager = {
       xfce = {
@@ -113,6 +128,7 @@
   };
 
   security.sudo.enable = true;
+  security.polkit.enable = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -129,21 +145,6 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  programs.fish = {
-    enable = true;
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.ozavodny = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "audio" "sway" ]; # Enable ‘sudo’ for the user.
-    createHome = true;
-    home = "/home/ozavodny";
-    shell = pkgs.fish;
-  };
-
-  users.users.root.shell = pkgs.fish;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
