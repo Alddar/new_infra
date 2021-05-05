@@ -4,6 +4,10 @@
     lolcat
     cmatrix
     exa
+
+    #fish plugins
+
+    fzf
   ];
 
   programs.git = {
@@ -18,5 +22,12 @@
       "ll" = "exa -l";
       "la" = "exa -la";
     };
+  };
+
+  programs.vim = {
+    enable = true;
+    plugins = with pkgs; [ 
+      vimPlugins.vim-nix
+    ];
   };
 }
