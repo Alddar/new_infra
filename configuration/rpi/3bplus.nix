@@ -5,7 +5,8 @@
 
   boot.kernelPackages = pkgs.linuxPackages;
 
-  boot.kernelParams = ["cma=256M"];
+  boot.kernelParams = ["cma=32M"];
+  boot.initrd.kernelModules = [ "vc4" "bcm2835_dma" "i2c_bcm2835" ];
 
   environment.systemPackages = with pkgs; [
     libraspberrypi
