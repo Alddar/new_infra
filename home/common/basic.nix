@@ -13,6 +13,9 @@
   programs.git = {
     userEmail = "ondrej@zavodny.net";
     userName = "Ondřej Závodný";
+    extraConfig = {
+      pull.rebase = false;
+    };
   };
 
   programs.fish = {
@@ -26,7 +29,7 @@
 
   programs.vim = {
     enable = true;
-    plugins = with pkgs; [ 
+    plugins = with pkgs; [
       vimPlugins.vim-nix
     ];
   };
