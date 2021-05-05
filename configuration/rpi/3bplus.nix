@@ -12,7 +12,7 @@
     gpu_mem=256
   '';
   environment.systemPackages = with pkgs; [
-    raspberrypi-tools
+    libraspberrypi
   ];
 
   fileSystems = {
@@ -23,7 +23,7 @@
   };
 
   # Preserve space by sacrificing documentation and history
-  services.nixosManual.enable = false;
+  documentation.nixos.enable = false;
   nix.gc.automatic = true;
   nix.gc.options = "--delete-older-than 30d";
   boot.cleanTmpDir = true;
