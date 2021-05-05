@@ -19,8 +19,9 @@ in
       wget
       vim
       git
-      fish
     ];
+
+    programs.fish.enable = true;
 
     users.users.ozavodny = {
       isNormalUser = true;
