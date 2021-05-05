@@ -27,8 +27,4 @@
   nix.gc.automatic = true;
   nix.gc.options = "--delete-older-than 30d";
   boot.cleanTmpDir = true;
-
-  # Configure basic SSH access
-  services.openssh.enable = true;
-  services.openssh.permitRootLogin = "yes";
 }
