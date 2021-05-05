@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   boot.loader.grub.enable = false;
+  boot.loader.generic-extlinux-compatible.enable = true;
 
   boot.kernelPackages = pkgs.linuxPackages;
 
@@ -16,10 +17,4 @@
       fsType = "ext4";
     };
   };
-
-  # Preserve space by sacrificing documentation and history
-  documentation.nixos.enable = false;
-  nix.gc.automatic = true;
-  nix.gc.options = "--delete-older-than 30d";
-  boot.cleanTmpDir = true;
 }
