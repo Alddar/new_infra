@@ -19,6 +19,7 @@ in
       wget
       vim
       git
+      htop
     ];
 
     programs.fish.enable = true;
