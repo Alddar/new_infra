@@ -11,6 +11,7 @@
   ];
 
   programs.git = {
+    enable = true;
     userEmail = "ondrej@zavodny.net";
     userName = "Ondřej Závodný";
     extraConfig = {
