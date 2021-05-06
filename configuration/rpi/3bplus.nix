@@ -18,4 +18,6 @@
       fsType = "ext4";
     };
   };
+
+  swapDevices = [ { device = "/swapfile"; size = 1024; } ];
 }
