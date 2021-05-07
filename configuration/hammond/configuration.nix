@@ -87,6 +87,7 @@
     pamixer
     xorg.xbacklight
     vivaldi
+    nix
   ];
 
 
@@ -167,6 +168,8 @@
   ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
