@@ -12,7 +12,7 @@
     # "wg0" is the network interface name. You can name the interface arbitrarily.
     wg0 = {
       # Determines the IP address and subnet of the client's end of the tunnel interface.
-      ips = [ "192.168.69.0/24" ];
+      ips = [ "192.168.69.2/24" ];
       listenPort = 51194; # to match firewall allowedUDPPorts (without this wg uses random port numbers)
 
       # Path to the private key file.
