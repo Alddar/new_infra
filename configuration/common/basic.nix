@@ -34,8 +34,11 @@ in
 
     security.sudo.extraRules = [
       { groups = [ "wheel" ];
-        commands = [ "ALL" ];
-        options = [ "NOPASSWD" ];
+        commands = [
+          { command = "ALL";
+            options = [ "NOPASSWD" ];
+          }
+        ];
       }
     ];
 
