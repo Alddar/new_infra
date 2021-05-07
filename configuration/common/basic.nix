@@ -32,6 +32,13 @@ in
       shell = pkgs.fish;
     };
 
+    security.sudo.extraRules = [
+      { groups = [ "wheel" ];
+        command = [ "ALL" ];
+        options = [ "NOPASSWD" ];
+      }
+    ];
+
     users.users.root.shell = pkgs.fish;
   };
 }
