@@ -3,6 +3,7 @@
   imports = [
     ../common/basic.nix
     ../rpi/3bplus.nix
+    ../common/wireguard.nix
   ];
 
   basic.user.extraGroups = [ "wheel" ];
