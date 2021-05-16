@@ -17,9 +17,9 @@
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
-#    recommendedTlsSettings = true;
+    recommendedTlsSettings = true;
     # other Nginx options
-    virtualHosts."*" =  {
+    virtualHostcoms."*" =  {
       locations."/" = {
         proxyPass = "http://192.168.0.2:8096";
         proxyWebsockets = true; # needed if you need to use WebSocket
@@ -31,5 +31,13 @@
           ;
       };
     };
-};
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPortRanges = [
+      { from = 80; to = 80; }
+      { from = 443; to = 443; }
+    ];
+  };
 }
