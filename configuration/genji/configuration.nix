@@ -35,9 +35,6 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPortRanges = [
-      { from = 80; to = 80; }
-      { from = 443; to = 443; }
-    ];
+    allowedTCPPorts = [ 80 443 ];
   };
 }
