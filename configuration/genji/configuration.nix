@@ -20,8 +20,6 @@
     recommendedTlsSettings = true;
     # other Nginx options
     virtualHosts."jellyfin.genji.local" =  {
-      enableACME = true;
-      forceSSL = true;
       locations."/" = {
         proxyPass = "http://192.168.0.2:8096";
         proxyWebsockets = true; # needed if you need to use WebSocket
