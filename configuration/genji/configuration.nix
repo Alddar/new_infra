@@ -17,7 +17,7 @@
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
-    recommendedTlsSettings = true;
+#    recommendedTlsSettings = true;
     # other Nginx options
     virtualHosts."*" =  {
       locations."/" = {
