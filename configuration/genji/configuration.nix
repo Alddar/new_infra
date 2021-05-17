@@ -9,6 +9,7 @@
   basic.user.extraGroups = [ "wheel" ];
 
   networking.hostName = "genji";
+  networking.enableIPv6 = true;
 
     # Configure basic SSH access
   services.openssh.enable = true;
@@ -20,15 +21,15 @@
       . {
         # Cloudflare and Google
         forward . 1.1.1.1 1.0.0.1 8.8.8.8 8.8.4.4
+        template ANY ANY local {
+          answer "{{ .Name }} 60 IN A 192.168.0.3"
+        }
+
         cache
       }
-
-      local {
-        template IN A  {
-            answer "{{ .Name }} 0 IN A 127.0.0.1"
-        }
-      }
     '';
+
+  networking.nameservers = [ "127.0.0.1" "192.168.0.1" ];
 
   services.nginx = {
     enable = true;
@@ -64,6 +65,7 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 443 ];
+    allowedTCPPorts = [ 80 443 53 ];
+    allowedUDPPorts = [ 53 ];
   };
 }
