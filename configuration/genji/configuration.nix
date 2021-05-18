@@ -8,8 +8,37 @@
 
   basic.user.extraGroups = [ "wheel" ];
 
+  networking.defaultGateway = "192.168.0.1";
   networking.hostName = "genji";
   networking.enableIPv6 = true;
+  networking.interfaces.eth0 = {
+    useDHCP = false;
+    ipv4.addresses = [{
+     address = "192.168.0.3";
+     prefixLength = 24;
+    }];
+  };
+  networking.dhcpd = {
+    enable = true;
+    extraConfig = ''
+    option domain-name "mrdka";
+    option routers 192.168.0.1;
+    option domain-name-servers 192.168.0.3, 192.168.0.1;
+    option subnet-mask 255.255.255.0;
+    option broadcast-address 192.168.0.255;
+    default-lease-time 3600;
+    max-lease-time 7200;
+
+    subnet 192.168.0.0 netmask 255.255.255.0 {
+          range 192.168.0.100 192.168.0.200;
+    }
+
+    host tracer {
+      hardware ethernet B8:27:EB:C6:E6:66;
+      fixed-address 192.168.0.2;
+    }
+    '';
+  };
 
     # Configure basic SSH access
   services.openssh.enable = true;
@@ -19,8 +48,8 @@
   services.coredns.config =
     ''
       . {
-        # Cloudflare and Google
         forward . 1.1.1.1 1.0.0.1 8.8.8.8 8.8.4.4
+
         template ANY ANY local {
           answer "{{ .Name }} 60 IN A 192.168.0.3"
         }
