@@ -95,6 +95,6 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 80 443 53 ];
-    allowedUDPPorts = [ 53 ];
+    allowedUDPPorts = [ 53 68 ];
   };
 }
