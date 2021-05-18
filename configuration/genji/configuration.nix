@@ -18,7 +18,7 @@
      prefixLength = 24;
     }];
   };
-  networking.dhcpd = {
+  networking.dhcpcd = {
     enable = true;
     extraConfig = ''
     option domain-name "mrdka";
