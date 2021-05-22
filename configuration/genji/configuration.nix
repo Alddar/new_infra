@@ -18,7 +18,25 @@
      prefixLength = 24;
     }];
   };
-  networking.dhcpcd = {
+
+  services.dnsmasq = {
+    enable = true;
+    extraConfig = ''
+      listen-address=::1,127.0.0.1,192.168.0.3
+      interface=eth0
+      domain=zavodny.lan
+      server=1.1.1.1
+      server=1.0.0.1
+      server=8.8.8.8
+      server=8.8.4.4
+      address=/zavodny.lan/192.168.0.3
+      dhcp-range=192.168.0.100,192.168.0.200,12h
+      dhcp-leasefile=/var/lib/dnsmasq/dnsmasq.leases
+      dhcp-authoritative
+    '';
+  };
+
+  /* networking.dhcpcd = {
     enable = true;
     extraConfig = ''
     option domain-name "mrdka";
@@ -38,13 +56,15 @@
       fixed-address 192.168.0.2;
     }
     '';
-  };
+  }; */
+
+  networking.nameservers = [ "127.0.0.1" "192.168.0.1" ];
 
     # Configure basic SSH access
   services.openssh.enable = true;
   services.openssh.permitRootLogin = "yes";
 
-  services.coredns.enable = true;
+  /* services.coredns.enable = true;
   services.coredns.config =
     ''
       . {
@@ -56,9 +76,7 @@
 
         cache
       }
-    '';
-
-  networking.nameservers = [ "127.0.0.1" "192.168.0.1" ];
+    ''; */
 
   services.nginx = {
     enable = true;
